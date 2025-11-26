@@ -31,24 +31,18 @@ echo "Using OpenJDK version: $JDK_VER"
 echo "Using MongoDB version: $MONGODB_VER"
 
 
-# -----------------------------
 # 2. Update system
-# -----------------------------
 echo "Updating package database..."
 sudo apt update && sudo apt dist-upgrade -y
 
-# -----------------------------
 # 3. Install Dependencies
-# -----------------------------
 echo "Installing base dependencies..."
 sudo apt install -y \
     openjdk-$JDK_VER-jdk-headless \
     gnupg \
     jsvc
 
-# -----------------------------
 # 4. Install MongoDB
-# -----------------------------
 echo "Installing MongoDB repository key..."
 curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
@@ -85,9 +79,7 @@ for pkg in mongodb-org \
     echo "$pkg hold" | sudo dpkg --set-selections
 done
 
-# -----------------------------
 # 5. Install Omada Controller
-# -----------------------------
 echo "Downloading the Omada Controller, version ${OMADA_VER}..."
 wget "https://static.tp-link.com/upload/software/2025/202510/20251031/omada_v${OMADA_VER}_linux_x64_20251027202535.deb"
 
