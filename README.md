@@ -29,7 +29,7 @@ sudo apt update && sudo apt dist-upgrade -y
 ## 2. Pull the Script, Change Permissions, and Run the Script
 
 ```
-wget "https://github.com/CVET0311/omada/blob/main/install-omada.sh"
+wget https://raw.githubusercontent.com/CVET0311/omada/main/install-omada.sh
 chmod u+x install-omada.sh
 ./install-omada.sh
 ```
