@@ -51,8 +51,10 @@ echo "Adding MongoDB repo..."
 echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" \
     | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 
+# Update the local package repos with the MongoDB repo.
 sudo apt update
 
+# Install a specific version of MongoDB (see Omada SDN's latest requirements)
 echo "Installing MongoDB version $MONGODB_VER..."
 sudo apt install -y --allow-downgrades \
     mongodb-org="$MONGODB_VER" \
@@ -64,11 +66,12 @@ sudo apt install -y --allow-downgrades \
     mongodb-org-tools="$MONGODB_VER" \
     mongodb-org-database-tools-extra="$MONGODB_VER"
 
+# Start and enable MongoDB
 echo "Starting MongoDB..."
 sudo systemctl daemon-reload
 sudo systemctl enable --now mongod
 
-# Prevent upgrades
+# Prevent upgrades on MongoDB, which may break the install later
 echo "Holding MongoDB packages..."
 for pkg in mongodb-org \
            mongodb-org-database \
